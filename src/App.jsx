@@ -24,21 +24,29 @@ export default function ARDSystems() {
     }
   }, [isModalOpen]);
 
-  // Dynamic Intersection Observer (Once on Mobile, Repeated on Desktop)
+  // Hybrid Intersection Observer: One-Time on Mobile, Repeating on Desktop
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      // Check if the current screen is mobile size
+      // Screen size check karo
       const isMobile = window.innerWidth <= 768;
 
       entries.forEach(entry => {
         const id = entry.target.getAttribute('data-id');
         
         if (entry.isIntersecting) {
-          // Always reveal the element when it enters the screen
+          // Element screen par aaya -> Usko dikhao
           setVisibleElements(prev => ({ ...prev, [id]: true }));
-        } else if (!isMobile) {
-          // Only hide the element when it leaves the screen IF it is a desktop
-          setVisibleElements(prev => ({ ...prev, [id]: false }));
+          
+          // AGAR MOBILE HAI: Toh is element ko dobara track karna band kar do (Locks it)
+          if (isMobile) {
+            observer.unobserve(entry.target);
+          }
+        } else {
+          // Element screen se bahar gaya
+          // AGAR LAPTOP HAI: Toh usko wapas hide kar do taaki dobara animate ho sake
+          if (!isMobile) {
+            setVisibleElements(prev => ({ ...prev, [id]: false }));
+          }
         }
       });
     }, { threshold: 0.1 }); 
