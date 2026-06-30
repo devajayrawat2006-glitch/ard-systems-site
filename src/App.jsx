@@ -353,10 +353,7 @@ export default function ARDSystems() {
           /* Fix Pricing Toggle buttons */
           .toggle-btn { padding: 8px 10px !important; font-size: 0.75rem !important; }
 
-          /* Neutralize vertical shift to prevent observer loops */
-          .reveal-up {
-            transform: translateY(0) !important;
-          }
+          
         }
       `}} />
 
