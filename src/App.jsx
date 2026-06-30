@@ -361,7 +361,12 @@ export default function ARDSystems() {
           /* Fix Pricing Toggle buttons */
           .toggle-btn { padding: 8px 10px !important; font-size: 0.75rem !important; }
 
-          
+          /* 🛑 DISABLE ANIMATIONS ON MOBILE FOR 100% STABILITY 🛑 */
+          .reveal-up {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: none !important;
+          } 
         }
       `}} />
 
