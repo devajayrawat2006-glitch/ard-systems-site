@@ -24,12 +24,22 @@ export default function ARDSystems() {
     }
   }, [isModalOpen]);
 
-  // Infinite Re-triggering Intersection Observer
+  // Dynamic Intersection Observer (Once on Mobile, Repeated on Desktop)
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
+      // Check if the current screen is mobile size
+      const isMobile = window.innerWidth <= 768;
+
       entries.forEach(entry => {
         const id = entry.target.getAttribute('data-id');
-        setVisibleElements(prev => ({ ...prev, [id]: entry.isIntersecting }));
+        
+        if (entry.isIntersecting) {
+          // Always reveal the element when it enters the screen
+          setVisibleElements(prev => ({ ...prev, [id]: true }));
+        } else if (!isMobile) {
+          // Only hide the element when it leaves the screen IF it is a desktop
+          setVisibleElements(prev => ({ ...prev, [id]: false }));
+        }
       });
     }, { threshold: 0.1 }); 
 
@@ -39,12 +49,7 @@ export default function ARDSystems() {
 
     return () => observer.disconnect();
   }, []);
-
-  const setRef = (el) => {
-    if (el && !observeRefs.current.includes(el)) {
-      observeRefs.current.push(el);
-    }
-  };
+ 
 
   const theme = {
     bg: '#F5F5F7', 
