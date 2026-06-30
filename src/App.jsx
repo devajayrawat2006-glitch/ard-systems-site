@@ -50,6 +50,11 @@ export default function ARDSystems() {
     return () => observer.disconnect();
   }, []);
  
+  const setRef = (el) => {
+    if (el && !observeRefs.current.includes(el)) {
+      observeRefs.current.push(el);
+    }
+  };
 
   const theme = {
     bg: '#F5F5F7', 
