@@ -315,6 +315,34 @@ export default function ARDSystems() {
           .pipeline-node { left: -57px; width: 40px; height: 40px; font-size: 1rem; box-shadow: 0 0 0 4px ${theme.bg}; }
           .header-right { display: none !important; }
         }
+          /* --- SUPREME MOBILE RESPONSIVENESS PATCH --- */
+        @media (max-width: 768px) {
+          /* Scale down massive typography */
+          h1 { font-size: 2.8rem !important; }
+          h2 { font-size: 2.2rem !important; }
+          h3 { font-size: 1.8rem !important; }
+          p { font-size: 1rem !important; }
+          
+          /* Fix Hero & Section Spacing */
+          header { padding: 100px 0 60px !important; }
+          section { padding: 80px 0 !important; }
+          
+          /* Fix Case Study Image Overflow */
+          div[style*="flexWrap: 'wrap'"] { gap: 32px !important; }
+          div[data-id="case-img"] { flex-basis: 100% !important; height: 260px !important; }
+          div[data-id="case-text"] { flex-basis: 100% !important; }
+          
+          /* Shrink giant pricing numbers */
+          span[style*="5rem"] { font-size: 3.5rem !important; }
+          span[style*="2rem"] { font-size: 1.5rem !important; }
+          
+          /* Adjust Modal for small screens */
+          .modal-content { padding: 32px 20px !important; width: 95% !important; }
+          .modal-content h2 { font-size: 2rem !important; }
+          
+          /* Fix Pricing Toggle buttons */
+          .toggle-btn { padding: 8px 10px !important; font-size: 0.75rem !important; }
+        }
       `}} />
 
       {/* LEAD CAPTURE MODAL WITH DROPDOWN */}
